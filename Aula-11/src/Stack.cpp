@@ -20,7 +20,7 @@ void Stack::pop() {
 int Stack::top() {
     if (isEmpty()) {
         std::cout << "Stack is empty" << std::endl;
-        return;
+        return -1;
     }
 
     return stackBody.back();

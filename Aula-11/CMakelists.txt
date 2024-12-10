@@ -1,0 +1,35 @@
+# Configuracao basica do CMake
+cmake_minimum_required(VERSION 3.10)
+project(EstruturasDeDados LANGUAGES CXX VERSION 1.0.1)
+
+# Definir a pasta de saida da build
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+
+# Definir o padrao do C++ para no minimo C++17
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+# Diretorios de include
+include_directories(${PROJECT_SOURCE_DIR}/include)
+
+# Diretorios de origem
+file(GLOB SOURCES ${PROJECT_SOURCE_DIR}/src/*.cpp)
+
+# Criar o executavel
+add_executable(Estruturas ${SOURCES})
+
+# Mensagem de build para melhor usabilidade
+message(STATUS "Saida do build: ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}")
+
+# Flags de compilacaoo (opcional)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Werror")
+
+# Script de limpeza
+# Sempre limpe pastas de build ou inclua elas no gitignore
+# se for mandar para um repositorio
+# elas incluem configuracoes e caminhos locais que podem
+# interferir e atrapalhar o desenvolvimento de outro programador
+add_custom_target(clean-all
+    COMMAND ${CMAKE_COMMAND} -E rm -rf ${CMAKE_BINARY_DIR}
+    COMMENT "Limpando diretorio de build..."
+)
